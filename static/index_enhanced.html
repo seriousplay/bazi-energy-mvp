@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>八字能量分析系统 - 专业版</title>
+    <link rel="stylesheet" href="/static/css/style_enhanced.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-yin-yang"></i> 八字能量分析系统</h1>
+                <p class="subtitle">基于能量易学的专业命理分析平台</p>
+                <div class="version-badge">MVP v2.0</div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- 简化的单一输入表单 -->
+            <div class="input-section active" id="main-input">
+                <div class="card">
+                    <h2><i class="fas fa-user-circle"></i> 生辰信息输入</h2>
+                    <form id="mainForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">姓名：</label>
+                                <input type="text" id="name" name="name" 
+                                       placeholder="请输入您的姓名" required>
+                                <small class="help-text">用于个性化分析</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">性别：</label>
+                                <select id="gender" name="gender" required>
+                                    <option value="">请选择</option>
+                                    <option value="male">男</option>
+                                    <option value="female">女</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="birth_year">出生年份：</label>
+                                <input type="number" id="birth_year" name="birth_year" 
+                                       min="1900" max="2025" value="1990" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="birth_month">出生月份：</label>
+                                <select id="birth_month" name="birth_month" required>
+                                    <option value="">请选择</option>
+                                    <option value="1">1月</option>
+                                    <option value="2">2月</option>
+                                    <option value="3">3月</option>
+                                    <option value="4">4月</option>
+                                    <option value="5">5月</option>
+                                    <option value="6">6月</option>
+                                    <option value="7">7月</option>
+                                    <option value="8">8月</option>
+                                    <option value="9">9月</option>
+                                    <option value="10">10月</option>
+                                    <option value="11">11月</option>
+                                    <option value="12">12月</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="birth_day">出生日：</label>
+                                <input type="number" id="birth_day" name="birth_day" 
+                                       min="1" max="31" value="15" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="birth_hour">出生时：</label>
+                                <select id="birth_hour" name="birth_hour" required>
+                                    <option value="">请选择</option>
+                                    <option value="0">子时 (23-1点)</option>
+                                    <option value="2">丑时 (1-3点)</option>
+                                    <option value="4">寅时 (3-5点)</option>
+                                    <option value="6">卯时 (5-7点)</option>
+                                    <option value="8">辰时 (7-9点)</option>
+                                    <option value="10">巳时 (9-11点)</option>
+                                    <option value="12">午时 (11-13点)</option>
+                                    <option value="14">未时 (13-15点)</option>
+                                    <option value="16">申时 (15-17点)</option>
+                                    <option value="18">酉时 (17-19点)</option>
+                                    <option value="20">戌时 (19-21点)</option>
+                                    <option value="22">亥时 (21-23点)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">出生地：</label>
+                            <input type="text" id="location" name="location" 
+                                   placeholder="例如：北京、上海、广州、纽约、伦敦" required>
+                            <small class="help-text">系统将自动识别时区和南北半球</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="question">具体问题：</label>
+                            <textarea 
+                                id="question" 
+                                name="question" 
+                                placeholder="例如：我适合创业吗？未来五年的事业发展如何？我的性格特点是什么？"
+                                rows="3"
+                                maxlength="300"
+                            ></textarea>
+                            <small class="help-text">可选，300字以内。针对性问题可获得更精准的建议</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="mode">解读模式：</label>
+                                <select id="mode" name="mode">
+                                    <option value="detailed" selected>完整详细分析</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="llm_option">AI解读选项：</label>
+                                <select id="llm_option" name="llm_option">
+                                    <option value="local" selected>本地AI分析</option>
+                                    <option value="claude_api">Claude API分析</option>
+                                </select>
+                                <small class="help-text">选择不同的AI引擎进行解读</small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group" style="display: none;">
+                                <label for="current_age">当前年龄：</label>
+                                <input type="number" id="current_age" name="current_age" value="25" readonly>
+                                <small class="help-text">系统自动计算</small>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary" id="analyzeBtn">
+                            <i class="fas fa-magic"></i> 开始八字分析
+                        </button>
+                    </form>
+
+                    <div class="example-section">
+                        <h3><i class="fas fa-lightbulb"></i> 示例数据</h3>
+                        <div class="examples">
+                            <button class="example-btn" data-example='{"name":"张三","gender":"male","year":1990,"month":3,"day":15,"hour":14,"location":"北京"}'>示例1：张三 - 北京</button>
+                            <button class="example-btn" data-example='{"name":"李四","gender":"female","year":1985,"month":8,"day":22,"hour":10,"location":"上海"}'>示例2：李四 - 上海</button>
+                            <button class="example-btn" data-example='{"name":"王五","gender":"male","year":1992,"month":12,"day":5,"hour":18,"location":"广州"}'>示例3：王五 - 广州</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 结果显示区域 -->
+            <div class="result-section" id="resultSection" style="display: none;">
+                <div class="card">
+                    <div class="result-header">
+                        <h2><i class="fas fa-crystal-ball"></i> 分析结果</h2>
+                        <div class="result-actions">
+                            <button id="downloadPdf" class="btn-secondary">
+                                <i class="fas fa-download"></i> 下载PDF报告
+                            </button>
+                            <button id="toggleExpert" class="btn-secondary">
+                                <i class="fas fa-cog"></i> 切换专家视图
+                            </button>
+                            <button id="apiSettings" class="btn-secondary">
+                                <i class="fas fa-key"></i> API设置
+                            </button>
+                            <button id="newAnalysis" class="btn-secondary">
+                                <i class="fas fa-redo"></i> 重新分析
+                            </button>
+                        </div>
+                    </div>
+                    <div id="resultContent">
+                        <!-- 结果内容将由JavaScript动态插入 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 加载状态 -->
+            <div class="loading" id="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p class="loading-text">正在进行深度分析，请稍候...</p>
+                <div class="loading-steps">
+                    <div class="step active">解析八字</div>
+                    <div class="step">五行统计</div>
+                    <div class="step">格局判定</div>
+                    <div class="step">寒燥分析</div>
+                    <div class="step">病药判定</div>
+                    <div class="step">大运分析</div>
+                    <div class="step">智能解读</div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <p>© 2024 八字能量分析系统 | 基于传统命理学，仅供参考</p>
+                <div class="footer-links">
+                    <a href="#" onclick="showDisclaimer()">免责声明</a>
+                    <a href="/api/info" target="_blank">API文档</a>
+                    <a href="/api/v2/health" target="_blank">系统状态</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 免责声明模态框 -->
+    <div id="disclaimerModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>重要免责声明</h3>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p><strong>本系统基于传统命理学和能量易学理论</strong>，旨在提供人生参考和思维启发，具体说明如下：</p>
+                <ul>
+                    <li>本解读结果<strong>不构成医疗、法律、投资等专业建议</strong></li>
+                    <li>重要决策请咨询相关领域的专业人士</li>
+                    <li>南半球用户的节气判定可能存在局限性，建议专家审核</li>
+                    <li>大运流年分析仅供趋势参考，不作为具体预测</li>
+                    <li>健康调候建议不能替代专业医疗意见</li>
+                    <li>请理性对待解读结果，结合实际情况做出判断</li>
+                </ul>
+                <p>使用本系统即表示您已理解并同意以上条款。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- API设置模态框 -->
+    <div id="apiSettingsModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-key"></i> Claude API设置</h3>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="api-status" id="apiStatus">
+                    <!-- API状态显示 -->
+                </div>
+                
+                <form id="apiConfigForm">
+                    <div class="form-group">
+                        <label for="apiBaseUrl">API Base URL:</label>
+                        <input type="url" id="apiBaseUrl" name="apiBaseUrl" 
+                               value="https://dashscope.aliyuncs.com/api/v2/apps/claude-code-proxy" 
+                               required>
+                        <small class="help-text">Claude API的基础URL地址</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="apiKey">API Key:</label>
+                        <input type="password" id="apiKey" name="apiKey" 
+                               placeholder="请输入您的DashScope API Key" 
+                               required>
+                        <small class="help-text">用于认证的API密钥，不会被保存在本地</small>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" id="testApiBtn" class="btn-secondary">
+                            <i class="fas fa-vial"></i> 测试连接
+                        </button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> 保存配置
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="api-help">
+                    <h4><i class="fas fa-question-circle"></i> 如何获取API Key？</h4>
+                    <ol>
+                        <li>访问 <a href="https://dashscope.console.aliyun.com/" target="_blank">阿里云DashScope控制台</a></li>
+                        <li>登录您的阿里云账号</li>
+                        <li>在API-KEY管理页面创建新的API Key</li>
+                        <li>复制API Key并粘贴到上方输入框中</li>
+                    </ol>
+                    <p><strong>注意：</strong>API Key仅在当前会话中有效，不会永久保存。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app_enhanced.js"></script>
+</body>
+</html>

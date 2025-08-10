@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调试页面</title>
+    <style>
+        body { padding: 20px; font-family: Arial, sans-serif; }
+        .form-group { margin: 10px 0; }
+        label { display: block; margin-bottom: 5px; }
+        input, select, textarea { width: 200px; padding: 8px; margin-bottom: 10px; }
+        .btn-primary { 
+            background: blue; 
+            color: white; 
+            padding: 10px 20px; 
+            border: none; 
+            cursor: pointer; 
+            font-size: 16px;
+        }
+        .btn-primary:disabled {
+            background: gray;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>调试版本 - 八字能量解读</h1>
+    
+    <form id="baziForm">
+        <div class="form-group">
+            <label for="name">姓名：</label>
+            <input type="text" id="name" name="name" placeholder="请输入您的姓名" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="gender">性别：</label>
+            <select id="gender" name="gender" required>
+                <option value="">请选择</option>
+                <option value="male">男</option>
+                <option value="female">女</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="birth_year">出生年份：</label>
+            <input type="number" id="birth_year" name="birth_year" min="1900" max="2100" placeholder="1990" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="birth_month">出生月份：</label>
+            <select id="birth_month" name="birth_month" required>
+                <option value="">请选择</option>
+                <option value="1">1月</option>
+                <option value="2">2月</option>
+                <option value="3">3月</option>
+                <option value="4">4月</option>
+                <option value="5">5月</option>
+                <option value="6">6月</option>
+                <option value="7">7月</option>
+                <option value="8">8月</option>
+                <option value="9">9月</option>
+                <option value="10">10月</option>
+                <option value="11">11月</option>
+                <option value="12">12月</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="birth_day">出生日期：</label>
+            <input type="number" id="birth_day" name="birth_day" min="1" max="31" placeholder="15" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="birth_hour">出生时辰：</label>
+            <select id="birth_hour" name="birth_hour" required>
+                <option value="">请选择</option>
+                <option value="0">子时 (23:00-1:00)</option>
+                <option value="1">丑时 (1:00-3:00)</option>
+                <option value="3">寅时 (3:00-5:00)</option>
+                <option value="5">卯时 (5:00-7:00)</option>
+                <option value="7">辰时 (7:00-9:00)</option>
+                <option value="9">巳时 (9:00-11:00)</option>
+                <option value="11">午时 (11:00-13:00)</option>
+                <option value="13">未时 (13:00-15:00)</option>
+                <option value="15">申时 (15:00-17:00)</option>
+                <option value="17">酉时 (17:00-19:00)</option>
+                <option value="19">戌时 (19:00-21:00)</option>
+                <option value="21">亥时 (21:00-23:00)</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="location">出生地点：</label>
+            <input type="text" id="location" name="location" placeholder="北京" value="北京" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="question">咨询问题：</label>
+            <textarea id="question" name="question" placeholder="我适合创业吗？" rows="3"></textarea>
+        </div>
+        
+        <button type="submit" class="btn-primary" id="submitBtn">开始能量解读</button>
+    </form>
+    
+    <div id="result" style="margin-top: 20px; padding: 20px; background: #f0f0f0;"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('调试页面加载完成');
+            
+            const form = document.getElementById('baziForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const result = document.getElementById('result');
+            
+            console.log('元素检查:', { form: !!form, submitBtn: !!submitBtn });
+            
+            // 按钮点击事件
+            submitBtn.addEventListener('click', (e) => {
+                console.log('按钮被点击!');
+            });
+            
+            // 表单提交事件
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                console.log('表单提交事件触发');
+                
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData);
+                
+                // 转换数据格式
+                const requestData = {
+                    name: data.name,
+                    gender: data.gender,
+                    birth_year: parseInt(data.birth_year),
+                    birth_month: parseInt(data.birth_month),
+                    birth_day: parseInt(data.birth_day),
+                    birth_hour: parseInt(data.birth_hour),
+                    birth_minute: 0,
+                    location: data.location || '北京',
+                    question: data.question || ''
+                };
+                
+                console.log('提交数据:', requestData);
+                
+                try {
+                    result.innerHTML = '<p>正在分析中...</p>';
+                    
+                    const response = await fetch('/interpret', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(requestData)
+                    });
+                    
+                    const responseData = await response.json();
+                    console.log('服务器响应:', responseData);
+                    
+                    if (responseData.ok) {
+                        const baziInfo = responseData.result.bazi || {};
+                        const userInfo = responseData.result['用户信息'] || {};
+                        const bingyao = responseData.result['定病药']?.分级?.[0] || {};
+                        
+                        result.innerHTML = `
+                            <h3>分析结果</h3>
+                            <p><strong>姓名：</strong>${userInfo['姓名'] || '未知'}</p>
+                            <p><strong>八字：</strong>${baziInfo.year} ${baziInfo.month} ${baziInfo.day} ${baziInfo.hour}</p>
+                            <p><strong>命局类型：</strong>${bingyao['命局类型'] || '未知'}</p>
+                            <p><strong>君药：</strong>${bingyao['病药配置']?.['君药'] || '未知'}</p>
+                            <p><strong>臣药：</strong>${bingyao['病药配置']?.['臣药'] || '未知'}</p>
+                            <p><strong>次药：</strong>${bingyao['病药配置']?.['次药'] || '未知'}</p>
+                        `;
+                    } else {
+                        result.innerHTML = `<p style="color: red;">错误: ${responseData.detail || '分析失败'}</p>`;
+                    }
+                } catch (error) {
+                    console.error('请求错误:', error);
+                    result.innerHTML = `<p style="color: red;">网络错误: ${error.message}</p>`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

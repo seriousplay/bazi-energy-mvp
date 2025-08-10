@@ -1,0 +1,14 @@
+{
+  "info": {"name": "Bazi Energy MVP"},
+  "item": [
+    {
+      "name": "Interpret",
+      "request": {
+        "method": "POST",
+        "header": [{"key":"Content-Type","value":"application/json"}],
+        "body": {"mode":"raw","raw":"{\"bazi\": \"甲子 乙丑 丙寅 丁巳\", \"question\": \"我适合创业吗？\"}"},
+        "url": {"raw":"http://localhost:8000/interpret","host":["http://localhost:8000"],"path":["interpret"]}
+      }
+    }
+  ]
+}

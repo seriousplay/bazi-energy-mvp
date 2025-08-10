@@ -1,0 +1,222 @@
+/* 最小化响应式CSS - 只添加必要的响应式功能，不覆盖原有样式 */
+
+/* 表单行布局 - 只在需要的地方添加 */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* 表单分组样式 */
+.form-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-section h3 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 移动设备优化 */
+@media (max-width: 768px) {
+    /* 容器调整 */
+    .container {
+        padding: 10px !important;
+    }
+    
+    /* 表单行改为单列 */
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    /* 表单分组调整 */
+    .form-section {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    /* 表单输入优化 */
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px !important; /* 防止iOS缩放 */
+        padding: 14px !important;
+    }
+    
+    /* 按钮优化 */
+    .btn-primary {
+        padding: 16px 20px !important;
+        font-size: 1.1rem !important;
+        min-height: 56px !important;
+    }
+    
+    /* 头部调整 */
+    .header {
+        padding: 20px 15px !important;
+    }
+    
+    .header h1 {
+        font-size: 1.8rem !important;
+    }
+}
+
+/* 平板设备优化 */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .container {
+        padding: 15px !important;
+    }
+    
+    .header h1 {
+        font-size: 2rem !important;
+    }
+}
+
+/* 小屏手机优化 */
+@media (max-width: 480px) {
+    .container {
+        padding: 8px !important;
+    }
+    
+    .header {
+        padding: 15px 10px !important;
+    }
+    
+    .header h1 {
+        font-size: 1.6rem !important;
+    }
+    
+    .form-section {
+        padding: 12px !important;
+    }
+}
+
+/* 结果展示响应式 */
+@media (max-width: 768px) {
+    /* 八字显示 */
+    .bazi-display {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+    
+    /* 病药配置 */
+    .medicine-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+    
+    /* 五行图表 */
+    .elements-chart {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+}
+
+/* 横屏优化 */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .header {
+        margin-bottom: 15px !important;
+        padding: 15px !important;
+    }
+    
+    .header h1 {
+        font-size: 1.5rem !important;
+        margin-bottom: 5px !important;
+    }
+    
+    .form-section {
+        margin-bottom: 15px !important;
+    }
+}
+
+/* 新八字显示格式 - 天干地支分行显示 */
+.bazi-display-new {
+    margin: 15px 0;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid #e2e8f0;
+}
+
+.pillar-labels {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.pillar-label {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.tiangan-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.tiangan-cell {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #d32f2f;
+    background: rgba(211, 47, 47, 0.1);
+    padding: 12px 8px;
+    border-radius: 8px;
+}
+
+.dizhi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.dizhi-cell {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #1976d2;
+    background: rgba(25, 118, 210, 0.1);
+    padding: 12px 8px;
+    border-radius: 8px;
+}
+
+.zanggan {
+    font-size: 0.7rem;
+    color: #666;
+    font-weight: normal;
+    margin-top: 2px;
+    display: block;
+}
+
+.zanggan sub {
+    font-size: 0.6rem;
+}
+
+/* 新八字格式移动端优化 */
+@media (max-width: 480px) {
+    .tiangan-cell, .dizhi-cell {
+        font-size: 1.2rem !important;
+        padding: 10px 6px !important;
+    }
+    
+    .zanggan {
+        font-size: 0.6rem !important;
+    }
+}

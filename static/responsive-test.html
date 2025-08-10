@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>响应式测试页面</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .test-container { max-width: 1200px; margin: 0 auto; }
+        .test-header { text-align: center; margin-bottom: 30px; }
+        .device-frame { 
+            margin: 20px auto; 
+            border: 3px solid #333; 
+            border-radius: 15px; 
+            padding: 10px; 
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .device-label { 
+            text-align: center; 
+            margin-bottom: 10px; 
+            font-weight: bold; 
+            color: #333;
+            background: #e9ecef;
+            padding: 8px;
+            border-radius: 8px;
+        }
+        .desktop-frame { width: 1024px; height: 600px; }
+        .tablet-frame { width: 768px; height: 500px; }
+        .mobile-frame { width: 375px; height: 600px; }
+        .iframe-content { 
+            width: 100%; 
+            height: 100%; 
+            border: none; 
+            border-radius: 8px;
+        }
+        .feature-list {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .feature-list h3 { color: #333; margin-bottom: 15px; }
+        .feature-list ul { margin: 0; padding-left: 20px; }
+        .feature-list li { margin-bottom: 8px; line-height: 1.6; }
+        .status-indicator { 
+            display: inline-block; 
+            width: 12px; 
+            height: 12px; 
+            border-radius: 50%; 
+            margin-right: 8px;
+        }
+        .status-good { background: #28a745; }
+        .status-warning { background: #ffc107; }
+        .status-info { background: #17a2b8; }
+        .link-section {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .link-section a {
+            display: inline-block;
+            margin: 5px 10px;
+            padding: 10px 20px;
+            background: #1976d2;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .link-section a:hover { background: #1565c0; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h1>八字能量解读系统 - 响应式显示测试</h1>
+            <p>测试不同设备尺寸下的页面显示效果</p>
+        </div>
+
+        <div class="link-section">
+            <h3>可用页面版本</h3>
+            <a href="/" target="_blank">主页面 (响应式)</a>
+            <a href="/static/mobile.html" target="_blank">移动版</a>
+            <a href="/static/debug.html" target="_blank">调试版</a>
+            <a href="/static/test.html" target="_blank">简单测试</a>
+        </div>
+
+        <div class="feature-list">
+            <h3><span class="status-indicator status-good"></span>响应式设计特性</h3>
+            <ul>
+                <li><strong>自适应布局:</strong> 支持桌面、平板、手机三种主要设备</li>
+                <li><strong>触摸优化:</strong> 按钮和输入框针对触摸设备优化</li>
+                <li><strong>字体缩放:</strong> 防止iOS设备自动缩放</li>
+                <li><strong>网格布局:</strong> 表单字段在不同尺寸下智能重排</li>
+                <li><strong>图标适配:</strong> FontAwesome图标在各设备正常显示</li>
+                <li><strong>内容压缩:</strong> 小屏设备上内容合理压缩</li>
+                <li><strong>横屏适配:</strong> 支持横屏模式布局优化</li>
+            </ul>
+        </div>
+
+        <div class="device-frame desktop-frame">
+            <div class="device-label">💻 桌面设备 (1024px+)</div>
+            <iframe src="/" class="iframe-content"></iframe>
+        </div>
+
+        <div class="device-frame tablet-frame">
+            <div class="device-label">📱 平板设备 (768px-1024px)</div>
+            <iframe src="/" class="iframe-content"></iframe>
+        </div>
+
+        <div class="device-frame mobile-frame">
+            <div class="device-label">📱 手机设备 (≤768px)</div>
+            <iframe src="/static/mobile.html" class="iframe-content"></iframe>
+        </div>
+
+        <div class="feature-list">
+            <h3><span class="status-indicator status-info"></span>技术实现</h3>
+            <ul>
+                <li><strong>CSS Grid:</strong> 现代网格布局系统</li>
+                <li><strong>Flexbox:</strong> 弹性盒子模型</li>
+                <li><strong>Media Queries:</strong> 响应式媒体查询</li>
+                <li><strong>Viewport Meta:</strong> 视口元标签配置</li>
+                <li><strong>Touch Events:</strong> 触摸事件优化</li>
+                <li><strong>Progressive Enhancement:</strong> 渐进增强策略</li>
+            </ul>
+        </div>
+
+        <div class="feature-list">
+            <h3><span class="status-indicator status-warning"></span>测试说明</h3>
+            <ul>
+                <li>使用浏览器开发者工具的设备模拟功能进行测试</li>
+                <li>测试常见设备: iPhone SE, iPhone 12, iPad, iPad Pro</li>
+                <li>检查横屏和竖屏模式的显示效果</li>
+                <li>验证表单输入和按钮点击的可用性</li>
+                <li>确认内容在小屏设备上的可读性</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0; color: #666;">
+            <p>页面最后更新: <script>document.write(new Date().toLocaleString('zh-CN'))</script></p>
+        </div>
+    </div>
+</body>
+</html>

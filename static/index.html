@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>八字能量解读系统</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/responsive_minimal.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-yin-yang"></i> 八字能量解读系统</h1>
+            <p class="subtitle">基于传统命理学的现代化能量分析平台</p>
+        </header>
+
+        <main class="main-content">
+            <div class="input-section">
+                <div class="card">
+                    <h2><i class="fas fa-user"></i> 个人信息输入</h2>
+                    <form id="baziForm">
+                        <!-- 基本信息 -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-id-card"></i> 基本信息</h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">姓名：</label>
+                                    <input type="text" id="name" name="name" placeholder="请输入您的姓名" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="gender">性别：</label>
+                                    <select id="gender" name="gender" required>
+                                        <option value="">请选择</option>
+                                        <option value="male">男</option>
+                                        <option value="female">女</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 出生信息 -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-calendar"></i> 出生信息</h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="birth_year">出生年份：</label>
+                                    <input type="number" id="birth_year" name="birth_year" min="1900" max="2100" placeholder="1990" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="birth_month">出生月份：</label>
+                                    <select id="birth_month" name="birth_month" required>
+                                        <option value="">请选择</option>
+                                        <option value="1">1月</option>
+                                        <option value="2">2月</option>
+                                        <option value="3">3月</option>
+                                        <option value="4">4月</option>
+                                        <option value="5">5月</option>
+                                        <option value="6">6月</option>
+                                        <option value="7">7月</option>
+                                        <option value="8">8月</option>
+                                        <option value="9">9月</option>
+                                        <option value="10">10月</option>
+                                        <option value="11">11月</option>
+                                        <option value="12">12月</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="birth_day">出生日期：</label>
+                                    <input type="number" id="birth_day" name="birth_day" min="1" max="31" placeholder="15" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="birth_hour">出生时辰：</label>
+                                    <select id="birth_hour" name="birth_hour" required>
+                                        <option value="">请选择</option>
+                                        <option value="0">子时 (23:00-1:00)</option>
+                                        <option value="1">丑时 (1:00-3:00)</option>
+                                        <option value="3">寅时 (3:00-5:00)</option>
+                                        <option value="5">卯时 (5:00-7:00)</option>
+                                        <option value="7">辰时 (7:00-9:00)</option>
+                                        <option value="9">巳时 (9:00-11:00)</option>
+                                        <option value="11">午时 (11:00-13:00)</option>
+                                        <option value="13">未时 (13:00-15:00)</option>
+                                        <option value="15">申时 (15:00-17:00)</option>
+                                        <option value="17">酉时 (17:00-19:00)</option>
+                                        <option value="19">戌时 (19:00-21:00)</option>
+                                        <option value="21">亥时 (21:00-23:00)</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="birth_minute">具体分钟：</label>
+                                    <input type="number" id="birth_minute" name="birth_minute" min="0" max="59" placeholder="30" value="0">
+                                    <small class="help-text">不确定可填0</small>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="location">出生地点：</label>
+                                <input type="text" id="location" name="location" placeholder="北京" value="北京" required>
+                                <small class="help-text">用于确定时区和地理位置影响</small>
+                            </div>
+                        </div>
+
+                        <!-- 咨询问题 -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-question-circle"></i> 咨询问题</h3>
+                            <div class="form-group">
+                                <label for="question">当前最关心的问题：</label>
+                                <textarea 
+                                    id="question" 
+                                    name="question" 
+                                    placeholder="例如：我适合创业吗？感情运势如何？事业发展方向？健康状况？财运如何？"
+                                    rows="4"
+                                ></textarea>
+                                <small class="help-text">请描述您当前最关心的问题，系统会针对性地进行分析</small>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary" id="submitBtn">
+                            <i class="fas fa-magic"></i> 开始能量解读
+                        </button>
+                    </form>
+                </div>
+
+                <div class="example-section">
+                    <h3><i class="fas fa-lightbulb"></i> 使用说明</h3>
+                    <div class="instructions">
+                        <p><strong>系统功能：</strong></p>
+                        <ul>
+                            <li>自动转换出生信息为八字四柱</li>
+                            <li>分析命局格局和强弱</li>
+                            <li>识别五大命局类型（命旺、印重、财旺、煞重、伤官）</li>
+                            <li>病药体系分析（君药、臣药、次药）</li>
+                            <li>能量流动和五行关系分析</li>
+                            <li>大运分析和时机建议</li>
+                            <li>针对您的问题提供个性化解读</li>
+                        </ul>
+                        
+                        <p><strong>注意事项：</strong></p>
+                        <ul>
+                            <li>请确保出生时间准确，时辰对八字影响很大</li>
+                            <li>出生地点用于时区校准和地域气候分析</li>
+                            <li>问题描述越具体，解读结果越有针对性</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-section" id="resultSection" style="display: none;">
+                <div class="card">
+                    <h2><i class="fas fa-crystal-ball"></i> 能量解读结果</h2>
+                    <div id="resultContent">
+                        <!-- Results will be populated here -->
+                    </div>
+                    <button id="newAnalysis" class="btn-secondary">
+                        <i class="fas fa-redo"></i> 重新分析
+                    </button>
+                </div>
+            </div>
+
+            <div class="loading" id="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>正在解读您的能量画像，请稍候...</p>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>© 2024 八字能量解读系统 | 仅供参考，不构成决策建议</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/app_fixed.js"></script>
+</body>
+</html>
