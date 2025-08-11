@@ -26,8 +26,7 @@ class BaziApp {
         this.birthYearInput = document.getElementById('birth_year');
         this.birthMonthInput = document.getElementById('birth_month');
         this.birthDayInput = document.getElementById('birth_day');
-        this.birthHourInput = document.getElementById('birth_hour');
-        this.birthMinuteInput = document.getElementById('birth_minute');
+        this.birthTimeInput = document.getElementById('birth_time');
         this.locationInput = document.getElementById('location');
         this.questionInput = document.getElementById('question');
         
@@ -93,7 +92,7 @@ class BaziApp {
         
         // 简单验证
         if (!formData.name || !formData.gender || !formData.birth_year || 
-            !formData.birth_month || !formData.birth_day || !formData.birth_hour) {
+            !formData.birth_month || !formData.birth_day || !formData.birth_time) {
             this.showError('请填写完整的基本信息');
             return;
         }
@@ -111,14 +110,19 @@ class BaziApp {
     }
     
     collectFormData() {
+        // 解析时间输入 (HH:MM 格式)
+        const timeValue = this.birthTimeInput?.value || '12:00';
+        const [hour, minute] = timeValue.split(':').map(num => parseInt(num));
+        
         return {
             name: this.nameInput?.value?.trim() || '',
             gender: this.genderInput?.value || '',
             birth_year: parseInt(this.birthYearInput?.value) || 0,
             birth_month: parseInt(this.birthMonthInput?.value) || 0,
             birth_day: parseInt(this.birthDayInput?.value) || 0,
-            birth_hour: parseInt(this.birthHourInput?.value) || 0,
-            birth_minute: parseInt(this.birthMinuteInput?.value) || 0,
+            birth_hour: hour || 0,
+            birth_minute: minute || 0,
+            birth_time: timeValue, // 保留原始时间字符串用于验证
             location: this.locationInput?.value?.trim() || '北京',
             question: this.questionInput?.value?.trim() || ''
         };

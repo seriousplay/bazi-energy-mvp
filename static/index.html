@@ -44,6 +44,10 @@
                         <!-- 出生信息 -->
                         <div class="form-section">
                             <h3><i class="fas fa-calendar"></i> 出生信息</h3>
+                            <p class="form-description">
+                                <i class="fas fa-info-circle"></i> 
+                                请输入<strong>公历生日时间</strong>（阳历），系统会自动转换为八字命盘
+                            </p>
                             
                             <div class="form-row">
                                 <div class="form-group">
@@ -78,28 +82,9 @@
                             
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="birth_hour">出生时辰：</label>
-                                    <select id="birth_hour" name="birth_hour" required>
-                                        <option value="">请选择</option>
-                                        <option value="0">子时 (23:00-1:00)</option>
-                                        <option value="1">丑时 (1:00-3:00)</option>
-                                        <option value="3">寅时 (3:00-5:00)</option>
-                                        <option value="5">卯时 (5:00-7:00)</option>
-                                        <option value="7">辰时 (7:00-9:00)</option>
-                                        <option value="9">巳时 (9:00-11:00)</option>
-                                        <option value="11">午时 (11:00-13:00)</option>
-                                        <option value="13">未时 (13:00-15:00)</option>
-                                        <option value="15">申时 (15:00-17:00)</option>
-                                        <option value="17">酉时 (17:00-19:00)</option>
-                                        <option value="19">戌时 (19:00-21:00)</option>
-                                        <option value="21">亥时 (21:00-23:00)</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="birth_minute">具体分钟：</label>
-                                    <input type="number" id="birth_minute" name="birth_minute" min="0" max="59" placeholder="30" value="0">
-                                    <small class="help-text">不确定可填0</small>
+                                    <label for="birth_time">出生时间：</label>
+                                    <input type="time" id="birth_time" name="birth_time" required>
+                                    <small class="help-text">24小时制格式，如 19:35</small>
                                 </div>
                             </div>
                             
